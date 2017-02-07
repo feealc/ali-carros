@@ -1,0 +1,21 @@
+{
+  "name": "api-carros",
+  "version": "1.0.0",
+  "description": "API feita para os alunos treinarem desenvolver apps consumindo um webservice",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon sources/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Fernando Brum <fernandobalcantara@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.4.7",
+    "body-parser": "^1.16.0",
+    "express": "^4.14.1",
+    "mongoose": "^4.8.1",
+    "nodemon": "^1.11.0",
+    "valid-objectid": "0.0.2"
+  }
+}

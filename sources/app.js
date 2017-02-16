@@ -3,14 +3,19 @@ var mongoose = require('mongoose')
 var bluebird = require('bluebird')
 var router = require('./router.js')
 var bodyParser = require('body-parser')
+var expressValidator = require('express-validator')
 
 //
 
-const server = express()
+const app = express()
 const port = process.env.PORT || 4001
 
-server
+//
+
+app
 	.use(bodyParser.json())
+	.use(expressValidator())
+	.use('/api/doc', express.static('doc'))
 	.use('/api', router)
 
 mongoose.Promise = bluebird
@@ -21,5 +26,5 @@ mongoose.connect(mongoconect, err => {
   if (err) {
     return console.log('error on connect db')
   }
-  server.listen(port, () => console.log(`localhost:${port}`))
+  app.listen(port, () => console.log(`localhost:${port}`))
 })

@@ -1,11 +1,12 @@
 {
   "name": "api-carros",
-  "version": "1.0.0",
-  "description": "API feita para os alunos treinarem desenvolver apps consumindo um webservice",
+  "version": "0.1.0",
+  "description": "API feita para os alunos treinarem o desenvolvimento de apps consumindo um webservice",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon sources/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "apidoc": "apidoc -f sources -e node_modules",
+    "test": "./node_modules/.bin/mocha --reporter spec sources/app.spec.js"
   },
   "keywords": [],
   "author": "Fernando Brum <fernandobalcantara@gmail.com>",
@@ -14,8 +15,27 @@
     "bluebird": "^3.4.7",
     "body-parser": "^1.16.0",
     "express": "^4.14.1",
+    "express-validator": "^3.1.2",
     "mongoose": "^4.8.1",
     "nodemon": "^1.11.0",
     "valid-objectid": "0.0.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "mocha": "^3.2.0"
+  },
+  "apidoc": {
+    "title": "API Carros",
+    "url": "https://api-carros.herokuapp.com/api",
+    "order": [
+      "getAll",
+      "getOne",
+      "create",
+      "updFull",
+      "updParcial",
+      "del",
+      "delAll"
+    ]
   }
 }

@@ -23,10 +23,46 @@ var carrosParamModel = {
 }
 
 // criar objeto para as mensagens que as funcoes retornar. Ex.: CarroAlterado, CarroCriado
+var msgResponse = {
+	'msg': 'message',
+	//
+	'c500all': 'ErroRecuperarCarros',
+	'c500one': 'ErroRecuperarCarro',
+	'c500create': 'ErroCriarCarro',
+	'c500': 'ErroRecuperarCarro',
+	//
+	'c400upd': 'ErroAlterarCarro',
+	'c400del': 'ErroApagarCarro',
+	'c400id': 'InvalidID',
+	'c404': 'CarroNaoEncontrado',
+	//
+	'c200upd': 'CarroAlterado',
+	'c200del': 'CarroApagado',
+	//
+	'c201': 'CarroCriado'
+}
 
 // criar objeto para os parametros que o expressValidator retorna - param, msg, value
+var expressValidatorParam = {
+	'param': 'param',
+	'msg': 'msg',
+	'value': 'value',
+	'array2': ['param', 'msg'],
+	'array3': ['param','msg','value']
+}
+
+var teste = {
+	p1: {
+		key1: 'val1',
+		key2: 'val2',
+		key3: 'val3'
+	}
+}
 
 module.exports = {
 	errorMessagesValidator,
-	carrosParamModel
+	carrosParamModel,
+	msgResponse,
+	expressValidatorParam,
+	teste
 }

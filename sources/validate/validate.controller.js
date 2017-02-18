@@ -1,5 +1,6 @@
 var validId = require('valid-objectid')
 var msg = require('../generic/generic.default.js').errorMessagesValidator
+var m = require('../generic/generic.default.js').msgResponse
 
 //
 
@@ -15,7 +16,7 @@ function id(req, res, next, value) {
     console.log(`invalid id ${value}`)
     return res
       .status(400)
-      .json({message: 'invalid id'})
+      .json({message: m.c400id})
   }
 
   next()

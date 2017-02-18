@@ -1,6 +1,7 @@
 var Carros = require('./carros.model.js')
 var gen = require('../generic/generic.controller.js')
 var validate = require('../validate/validate.controller.js')
+var m = require('../generic/generic.default.js').msgResponse
 
 //
 
@@ -62,7 +63,7 @@ function getAll(req, res) {
 			console.log(err)
 			return res
 				.status(500)
-				.json({message: 'ErroRecuperarCarros'})
+				.json({message: m.c500all})
 		})
 
 }
@@ -122,14 +123,14 @@ function getOne(req, res) {
 			} else {
 				return res
 					.status(404)
-					.json({message: 'CarroNaoEncontrado'})
+					.json({message: m.c404})
 			}
 		})
 		.catch((err) => {
 			console.log(err)
 			return res
 				.status(500)
-				.json({message: 'ErroRecuperarCarro'})
+				.json({message: c500one})
 		})
 }
 
@@ -197,13 +198,13 @@ function create(req, res) {
 				.then((carro) => {
 					return res
 						.status(201)
-						.json({message: 'CarroCriado', '_id': carro._id})
+						.json({message: m.c201, '_id': carro._id})
 				})
 				.catch((err) => {
 					console.log(err)
 					return res
 						.status(500)
-						.json({message: 'ErroCriarCarro'})
+						.json({message: m.c500create})
 				})
  		}
 	})
@@ -285,18 +286,18 @@ function updFull(req, res) { // put
 							.then(() => {
 								return res
 									.status(200)
-									.json({message: 'CarroAlterado'})
+									.json({message: m.c200upd})
 							})
 							.catch((err) => {
 								console.log(err)
 								return res
 									.status(400)
-									.json({message: 'ErroAlterarCarro'})
+									.json({message: m.c400upd})
 							})
 					} else {
 						return res
 							.status(404)
-							.json({message: 'CarroNaoEncontrado'})
+							.json({message: m.c404})
 					}
 
 				})
@@ -304,7 +305,7 @@ function updFull(req, res) { // put
 					console.log(err)
 					return res
 						.status(500)
-						.json({message: 'ErroRecuperarCarro'})
+						.json({message: m.c500})
 				})
  		}
 	})
@@ -384,26 +385,26 @@ function updParcial(req, res) { // patch
 							.then(() => {
 								return res
 									.status(200)
-									.json({message: 'CarroAlterado'})
+									.json({message: m.c200upd})
 							})
 							.catch((err) => {
 								console.log(err)
 								return res
 									.status(400)
-									.json({message: 'ErroAlterarCarro'})
+									.json({message: m.c400upd})
 							})
 
 					} else {
 						return res
 							.status(404)
-							.json({message: 'CarroNaoEncontrado'})
+							.json({message: m.c404})
 					}
 
 				})
 				.catch(() => {
 					return res
 						.status(500)
-						.json({message: 'ErroRecuperarCarro'})
+						.json({message: m.c500})
 				})
  			
  		}
@@ -443,18 +444,18 @@ function del(req, res) {
 			if (carro) {
 				return res
 					.status(200)
-					.json({message: 'CarroApagado'})
+					.json({message: m.c200del})
 			} else {
 				return res
 					.status(404)
-					.json({message: 'CarroNaoEncontrado'})
+					.json({message: m.c404})
 			}
 		})
 		.catch((err) => {
 			console.log(err)
 			return res
 				.status(400)
-				.json({message: 'ErroApagarCarro'})
+				.json({message: m.c400del})
 		})
 
 }

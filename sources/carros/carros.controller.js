@@ -19,9 +19,11 @@ module.exports = {
 
 /**
  * @api {get} /carros Recuperar as informações de todos os carros cadastrados
+ * @apiVersion 1.0.0
  * @apiName getAll
  * @apiGroup Carro
  *
+ * @apiSuccess {String} _id ID do carro.
  * @apiSuccess {String} marca Nome da marca.
  * @apiSuccess {String} modelo Nome do modelo.
  * @apiSuccess {String} cor Nome da cor.
@@ -36,6 +38,7 @@ module.exports = {
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
  *     [{
+ *       "_id": "XXXX",
  *       "marca": "Fiat",
  *       "modelo": "Bravo",
  *       "cor": "Cinza",
@@ -70,11 +73,13 @@ function getAll(req, res) {
 
 /**
  * @api {get} /carros/:id Recuperar as informações de um carro cadastrado
+ * @apiVersion 1.0.0
  * @apiName getOne
  * @apiGroup Carro
  *
  * @apiParam {String} id ID do carro.
  *
+ * @apiSuccess {String} _id ID do carro.
  * @apiSuccess {String} marca Nome da marca.
  * @apiSuccess {String} modelo Nome do modelo.
  * @apiSuccess {String} cor Nome da cor.
@@ -89,6 +94,7 @@ function getAll(req, res) {
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
  *     {
+ *       "_id": "XXXX",
  *       "marca": "Fiat",
  *       "modelo": "Bravo",
  *       "cor": "Cinza",
@@ -136,6 +142,7 @@ function getOne(req, res) {
 
 /**
  * @api {post} /carros Cadastrar um novo carro
+ * @apiVersion 1.0.0
  * @apiName create
  * @apiGroup Carro
  *
@@ -212,6 +219,7 @@ function create(req, res) {
 
 /**
  * @api {put} /carros/:id Alterar todas as informações de um carro
+ * @apiVersion 1.0.0
  * @apiDescription Este método altera a entidade inteira, mas mantém o mesmo ID do carro.
  * @apiName updFull
  * @apiGroup Carro
@@ -313,6 +321,7 @@ function updFull(req, res) { // put
 
 /**
  * @api {patch} /carros/:id Alterar informações de um carro
+ * @apiVersion 1.0.0
  * @apiDescription Este método altera somente as propriedades da entidade que foram passadas no body e mantém o mesmo ID do carro.
  * @apiName updParcial
  * @apiGroup Carro
@@ -413,6 +422,7 @@ function updParcial(req, res) { // patch
 
 /**
  * @api {delete} /carros/:id Apagar um carro
+ * @apiVersion 1.0.0
  * @apiName del
  * @apiGroup Carro
  *

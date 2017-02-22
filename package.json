@@ -1,8 +1,8 @@
 {
   "name": "api-carros",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "API feita para os alunos treinarem o desenvolvimento de apps consumindo um webservice",
-  "main": "index.js",
+  "main": "sources/app.js",
   "scripts": {
     "dev": "nodemon sources/app.js",
     "apidoc": "apidoc -f sources -e node_modules",

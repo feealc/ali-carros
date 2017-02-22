@@ -51,18 +51,9 @@ var expressValidatorParam = {
 	'array3': ['param','msg','value']
 }
 
-var teste = {
-	p1: {
-		key1: 'val1',
-		key2: 'val2',
-		key3: 'val3'
-	}
-}
-
 module.exports = {
 	errorMessagesValidator,
 	carrosParamModel,
 	msgResponse,
-	expressValidatorParam,
-	teste
+	expressValidatorParam
 }

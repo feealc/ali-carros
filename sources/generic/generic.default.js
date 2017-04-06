@@ -29,6 +29,8 @@ var msgResponse = {
 	'c500all': 'ErroRecuperarCarros',
 	'c500one': 'ErroRecuperarCarro',
 	'c500create': 'ErroCriarCarro',
+	'c500upd': 'ErroAlterarCarro',
+	'c500del': 'ErroApagarCarro',
 	'c500': 'ErroRecuperarCarro',
 	//
 	'c400upd': 'ErroAlterarCarro',

@@ -23,37 +23,11 @@ module.exports = {
  * @apiName getAll
  * @apiGroup Carro
  *
- * @apiSuccess {String} _id ID do carro.
- * @apiSuccess {String} marca Nome da marca.
- * @apiSuccess {String} modelo Nome do modelo.
- * @apiSuccess {String} cor Nome da cor.
- * @apiSuccess {Number} ano_fabricacao Ano da fabricação.
- * @apiSuccess {Number} ano_modelo Ano do modelo.
- * @apiSuccess {String} combustivel Nome do combustível.
- * @apiSuccess {Number} potencia Valor da potência.
- * @apiSuccess {Number} qtde_portas Quantidade de portas.
- * @apiSuccess {String} dt_criacao Data de criação (ISO 8601)
- * @apiSuccess {String} dt_ult_at Data da última modificação (ISO 8601)
+ * @apiUse CarroRetornoSucesso
  *
- * @apiSuccessExample {json} Success-Response:
- *     HTTP/1.1 200 OK
- *     [{
- *       "_id": "XXXX",
- *       "marca": "Fiat",
- *       "modelo": "Bravo",
- *       "cor": "Cinza",
- *       "ano_fabricacao": "2015",
- *       "ano_modelo": "2016",
- *       "combustivel": "Flex",
- *       "potencia": "130",
- *       "qtde_portas": "5",
- *       "dt_criacao": "2017-01-01",
- *       "dt_ult_at": "2017-01-02"
- *     }]
+ * @apiUse CarroExemploSucessoArray
  */
 function getAll(req, res) {
-
-	// console.log(req.headers)
 
 	Carros
 		.find({}, noShowFields)
@@ -79,45 +53,16 @@ function getAll(req, res) {
  *
  * @apiParam {String} id ID do carro.
  *
- * @apiSuccess {String} _id ID do carro.
- * @apiSuccess {String} marca Nome da marca.
- * @apiSuccess {String} modelo Nome do modelo.
- * @apiSuccess {String} cor Nome da cor.
- * @apiSuccess {Number} ano_fabricacao Ano da fabricação.
- * @apiSuccess {Number} ano_modelo Ano do modelo.
- * @apiSuccess {String} combustivel Nome do combustível.
- * @apiSuccess {Number} potencia Valor da potência.
- * @apiSuccess {Number} qtde_portas Quantidade de portas.
- * @apiSuccess {String} dt_criacao Data de criação (ISO 8601)
- * @apiSuccess {String} dt_ult_at Data da última modificação (ISO 8601)
+ * @apiUse CarroRetornoSucesso
  *
- * @apiSuccessExample {json} Success-Response:
- *     HTTP/1.1 200 OK
- *     {
- *       "_id": "XXXX",
- *       "marca": "Fiat",
- *       "modelo": "Bravo",
- *       "cor": "Cinza",
- *       "ano_fabricacao": "2015",
- *       "ano_modelo": "2016",
- *       "combustivel": "Flex",
- *       "potencia": "130",
- *       "qtde_portas": "5",
- *       "dt_criacao": "2017-01-01",
- *       "dt_ult_at": "2017-01-02"
- *     }
+ * @apiUse CarroExemploSucessoSimples
  *
- * @apiError  CarroNaoEncontrado O <code>ID</code> do carro não foi encontrado.
- *
- * @apiErrorExample {json} Error-Response:
- *     HTTP/1.1 404 Not Found
- *     {
- *       "message": "CarroNaoEncontrado"
- *     }
+ * @apiUse CarroRetornoErroNaoEncontrado
+ * @apiUse IDInvalidoErro
  */
 function getOne(req, res) {
 
-	const id = req.params.id
+	const id = req.body.id || req.params.id
 
 	Carros
 		.findById(id, noShowFields)
@@ -146,24 +91,12 @@ function getOne(req, res) {
  * @apiName create
  * @apiGroup Carro
  *
- * @apiHeader {String} Content-Type application/json
+ * @apiUse HeaderCType
  *
- * @apiHeaderExample {json} Header-Example:
- *     {
- *       "Content-Type": "application/json"
- *     }
+ * @apiUse CarroRequisicaoBody
  *
- * @apiParam (Body) {String} marca Obrigatório. Nome da marca.
- * @apiParam (Body) {String} modelo Obrigatório. Nome do modelo.
- * @apiParam (Body) {String} [cor] Nome da cor. Aceito somente letras.
- * @apiParam (Body) {Number} [ano_fabricacao] Ano da fabricação. Aceito somente números.
- * @apiParam (Body) {Number} [ano_modelo] Ano do modelo. Aceito somente números
- * @apiParam (Body) {String} [combustivel] Nome do combustível. Aceito somente letras.
- * @apiParam (Body) {Number} [potencia] Valor da potência. Aceito somente números.
- * @apiParam (Body) {Number} [qtde_portas] Quantidade de portas. Aceito somente números.
- *
- * @apiSuccess {String} message Carro criado.
- * @apiSuccess {String} _id O <code>ID</code> do carro criado.
+ * @apiSuccess {String} message Mensagem de sucesso.
+ * @apiSuccess {String} _id O ID do carro criado.
  *
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
@@ -172,17 +105,7 @@ function getOne(req, res) {
  *       "_id": "XXX"
  *     }
  *
- * @apiError  param Nome do parâmetro com erro.
- * @apiError  msg Descrição do erro.
- * @apiError  [value] Valor do parâmetro com erro.
- *
- * @apiErrorExample {json} Error-Response:
- *     HTTP/1.1 400 Bad Request
- *     {
- *       "param": "cor",
- *       "msg": "A cor precisa ser uma string sem números",
- *       "value": "Vermelho2"
- *     }
+ * @apiUse CarroRetornoErroValidacao
  */
 function create(req, res) {
 
@@ -224,18 +147,13 @@ function create(req, res) {
  * @apiName updFull
  * @apiGroup Carro
  *
+ * @apiUse HeaderCType
+ *
  * @apiParam {String} id ID do carro.
  *
- * @apiParam (Body) {String} marca Obrigatório. Nome da marca.
- * @apiParam (Body) {String} modelo Obrigatório. Nome do modelo.
- * @apiParam (Body) {String} [cor] Nome da cor. Aceito somente letras.
- * @apiParam (Body) {Number} [ano_fabricacao] Ano da fabricação. Aceito somente números.
- * @apiParam (Body) {Number} [ano_modelo] Ano do modelo. Aceito somente números
- * @apiParam (Body) {String} [combustivel] Nome do combustível. Aceito somente letras.
- * @apiParam (Body) {Number} [potencia] Valor da potência. Aceito somente números.
- * @apiParam (Body) {Number} [qtde_portas] Quantidade de portas. Aceito somente números.
+ * @apiUse CarroRequisicaoBody
  *
- * @apiSuccess {String} message Carro alterado.
+ * @apiSuccess {String} message Mensagem de sucesso.
  *
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
@@ -243,17 +161,9 @@ function create(req, res) {
  *       "message": "CarroAlterado"
  *     }
  *
- * @apiError  param Nome do parâmetro com erro.
- * @apiError  msg Descrição do erro.
- * @apiError  [value] Valor do parâmetro com erro.
- *
- * @apiErrorExample {json} Error-Response:
- *     HTTP/1.1 400 Bad Request
- *     {
- *       "param": "ano_fabricacao",
- *       "msg": "O ano de fabricação precisa ser somente números",
- *       "value": "2017a"
- *     }
+ * @apiUse CarroRetornoErroValidacao
+ * @apiUse CarroRetornoErroNaoEncontrado
+ * @apiUse IDInvalidoErro
  */
 function updFull(req, res) { // put
 
@@ -269,7 +179,7 @@ function updFull(req, res) { // put
 
  		} else {
 
- 			const id = req.params.id
+ 			const id = req.body.id || req.params.id
 			const novoCarro = new Carros(req.body)
 
 			Carros
@@ -299,8 +209,8 @@ function updFull(req, res) { // put
 							.catch((err) => {
 								console.log(err)
 								return res
-									.status(400)
-									.json({message: m.c400upd})
+									.status(500)
+									.json({message: m.c500upd})
 							})
 					} else {
 						return res
@@ -326,18 +236,13 @@ function updFull(req, res) { // put
  * @apiName updParcial
  * @apiGroup Carro
  *
+ * @apiUse HeaderCType
+ *
  * @apiParam {String} id ID do carro.
  *
- * @apiParam (Body) {String} marca Obrigatório. Nome da marca.
- * @apiParam (Body) {String} modelo Obrigatório. Nome do modelo.
- * @apiParam (Body) {String} [cor] Nome da cor. Aceito somente letras.
- * @apiParam (Body) {Number} [ano_fabricacao] Ano da fabricação. Aceito somente números.
- * @apiParam (Body) {Number} [ano_modelo] Ano do modelo. Aceito somente números
- * @apiParam (Body) {String} [combustivel] Nome do combustível. Aceito somente letras.
- * @apiParam (Body) {Number} [potencia] Valor da potência. Aceito somente números.
- * @apiParam (Body) {Number} [qtde_portas] Quantidade de portas. Aceito somente números.
+ * @apiUse CarroRequisicaoBody
  *
- * @apiSuccess {String} message Carro alterado.
+ * @apiSuccess {String} message Mensagem de sucesso.
  *
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
@@ -345,16 +250,9 @@ function updFull(req, res) { // put
  *       "message": "CarroAlterado"
  *     }
  *
- * @apiError  param Nome do parâmetro com erro.
- * @apiError  msg Descrição do erro.
- * @apiError  [value] Valor do parâmetro com erro.
- *
- * @apiErrorExample {json} Error-Response:
- *     HTTP/1.1 400 Bad Request
- *     {
- *       "param": "modelo",
- *       "msg": "O modelo é obrigatório",
- *     }
+ * @apiUse CarroRetornoErroValidacao
+ * @apiUse CarroRetornoErroNaoEncontrado
+ * @apiUse IDInvalidoErro
  */
 function updParcial(req, res) { // patch
 
@@ -370,7 +268,7 @@ function updParcial(req, res) { // patch
 
  		} else {
 
- 			const id = req.params.id
+ 			const id = req.body.id || req.params.id
 
 			Carros
 				.findById(id)
@@ -399,8 +297,8 @@ function updParcial(req, res) { // patch
 							.catch((err) => {
 								console.log(err)
 								return res
-									.status(400)
-									.json({message: m.c400upd})
+									.status(500)
+									.json({message: m.c500upd})
 							})
 
 					} else {
@@ -428,7 +326,7 @@ function updParcial(req, res) { // patch
  *
  * @apiParam {String} id ID do carro.
  *
- * @apiSuccess {String} message Carro apagado.
+ * @apiSuccess {String} message Mensagem de sucesso.
  *
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
@@ -436,17 +334,12 @@ function updParcial(req, res) { // patch
  *       "message": "CarroApagado"
  *     }
  *
- * @apiError  CarroNaoEncontrado O <code>ID</code> do carro não foi encontrado.
- *
- * @apiErrorExample {json} Error-Response:
- *     HTTP/1.1 404 Not Found
- *     {
- *       "message": "CarroNaoEncontrado"
- *     }
+ * @apiUse CarroRetornoErroNaoEncontrado
+ * @apiUse IDInvalidoErro
  */
 function del(req, res) {
 
-	const id = req.params.id
+	const id = req.body.id || req.params.id
 
 	Carros
 		.findByIdAndRemove(id)
@@ -464,8 +357,8 @@ function del(req, res) {
 		.catch((err) => {
 			console.log(err)
 			return res
-				.status(400)
-				.json({message: m.c400del})
+				.status(500)
+				.json({message: m.c500del})
 		})
 
 }
@@ -485,13 +378,16 @@ function del(req, res) {
  *     {
  *       "message": "CarroApagado"
  *     }
+ *
+ * @apiUse CarroRetornoErroNaoEncontrado
+ * @apiUse IDInvalidoErro
  */
 function delAll(req, res) {
 
 	Carros
 		.remove({})
 		.then(() => {
-			console.log('\n===== TODOS OS REGISTROS FORAM APAGADOS!!!! =====\n')
+			console.log('\n===== TODOS OS CARROS FORAM APAGADOS!!!! =====\n')
 			return res
 				.status(200)
 				.json({message: 'TodosCarrosApagados'})
@@ -499,7 +395,7 @@ function delAll(req, res) {
 		.catch((err) => {
 			console.log(err)
 			return res
-				.status(400)
+				.status(500)
 				.json({message: 'ErroApagarTodosCarros'})
 		})
 

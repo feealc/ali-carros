@@ -2,6 +2,9 @@
   "name": "api-carros",
   "version": "1.0.0",
   "description": "API feita para os alunos treinarem o desenvolvimento de apps consumindo um webservice",
+  "engines": {
+    "node": "6.11.1"
+  },
   "main": "sources/app.js",
   "scripts": {
     "dev": "nodemon sources/app.js",
